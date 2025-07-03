@@ -2,6 +2,7 @@ from base_model import BaseModel
 from datetime import datetime
 from gate import Gate
 from slot import Slot
+from vehicle import Vehicle
 
 
 class Ticket(BaseModel):
