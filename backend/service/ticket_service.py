@@ -1,7 +1,6 @@
 from models.ticket import Ticket
 from datetime import datetime
-from repo.gate_repo import GateRepo
-from repo.vehicle_repo import VehicleRepo
+from models.vehicle import Vehicle
 
 class TicketService:
     def __init__(self, GateRepo, VehicleRepo):
@@ -24,7 +23,9 @@ class TicketService:
         #vehicle info
         vehicle = self.VehicleRepo.find_vehicle_by_number(vehicle_number)
         if vehicle is None:
-            raise Exception('vehicle not found ')
+            vehicle = Vehicle(id=vehicle_number, owner_name=owner_name, vehicle_type=vehicle_type)
+            vehicle = self.VehicleRepo.save_vehicle(vehicle)
+        ticket.vehicle = vehicle
         # find a slot
         # update slot
         # update parking counters
